@@ -15,7 +15,7 @@ const contactDetails = {
   email: "tcconstruction7224@gmail.com",
 
   // பின்னர் உங்கள் address மாற்றிக்கொள்ளவும்
-  address: "60-A,Chinnasamy Nagar,Ganapthy,Coimbatore - 641 006.",
+  address: "60-A,Chinnasamy Nagar,Ganapathy,Coimbatore - 641 006.",
 
   // பின்னர் உங்கள் Google Map embed URL மாற்றவும்
 

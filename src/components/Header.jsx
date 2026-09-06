@@ -24,7 +24,37 @@ const initialQuoteForm = {
   email: "",
   message: "",
 };
+function DesktopHashLink({ text, to }) {
+  return (
+    <motion.div
+      whileHover={{ y: -2 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <HashLink
+        smooth
+        to={to}
+        className="
+          group relative
+          font-medium text-gray-800
+          transition-colors duration-300
+          hover:text-cyan-600
+        "
+      >
+        {text}
 
+        <span
+          className="
+            absolute -bottom-2 left-0
+            h-[2px] w-0
+            bg-gradient-to-r from-pink-500 to-cyan-400
+            transition-all duration-300
+            group-hover:w-full
+          "
+        />
+      </HashLink>
+    </motion.div>
+  );
+}
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [productOpen, setProductOpen] = useState(false);
@@ -39,12 +69,12 @@ function Header() {
   return (
     <>
       <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="mx-auto max-w-7xl px-5 lg:px-6">
-          <div className="flex h-24 items-center justify-between">
+        <div className="mx-auto max-w-7xl px-3 sm:px-5 lg:px-6">
+          <div className="flex h-16 items-center justify-between sm:h-20 2xl:h-24">
             {/* Logo */}
 
             <motion.a
-              href="#home"
+              href="/#home"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="flex items-center"
@@ -52,29 +82,17 @@ function Header() {
               <img
                 src={logo}
                 alt="Thirumala Construction"
-                className="h-20 w-auto object-contain"
+                className="h-12 w-auto object-contain sm:h-16 2xl:h-20"
               />
             </motion.a>
 
             {/* Desktop Menu */}
 
-            <nav className="hidden items-center gap-8 xl:flex">
-                <HashLink
-                smooth
-                to="/#home"
-                className="hover:text-orange-600 transition-colors"
-              >
-                Home
-              </HashLink>
+            <nav className="hidden items-center gap-5 text-sm 2xl:flex">
+                <DesktopHashLink text="Home" to="/#home" />
 
-                <HashLink
-                  smooth
-                  to="/#about"
-                  className="hover:text-orange-600 transition-colors"
-                >
-                  About
-                </HashLink>              
-                <NavLink text="Construction" href="/construction" />
+                  <DesktopHashLink text="About" to="/#about" />            
+              <NavLink text="Construction" href="/construction" />
 
               <Dropdown title="Our Manufacturing Products">
                 <DropdownItem
@@ -150,13 +168,7 @@ function Header() {
 
               <NavLink text="Projects" href="/projects" />
 
-              <HashLink
-                smooth
-                to="/#contact"
-                className="hover:text-orange-600 transition-colors"
-              >
-                Contact
-              </HashLink>            </nav>
+              <DesktopHashLink text="Contact" to="/#contact" />            </nav>
 
             {/* Desktop Quote Button */}
 
@@ -176,7 +188,7 @@ function Header() {
                 from-pink-600 via-pink-500 to-cyan-400
                 px-6 py-3
                 font-semibold text-white
-                xl:flex
+                2xl:flex
               "
             >
               Get a Quote
@@ -194,7 +206,7 @@ function Header() {
                 text-slate-800
                 transition-colors
                 hover:bg-slate-100
-                xl:hidden
+                2xl:hidden
               "
               aria-label="Toggle navigation menu"
             >
@@ -228,7 +240,7 @@ function Header() {
                 xl:hidden
               "
             >
-              <div className="flex flex-col gap-4 px-6 py-5">
+              <div className="flex flex-col gap-2 px-4 py-4 sm:px-6 sm:py-5">
                 <MobileAnchor
                   text="Home"
                   href="/#home"
@@ -240,12 +252,11 @@ function Header() {
                   href="/#about"
                   onClick={() => setMenuOpen(false)}
                 />
-
-              <MobileRouterLink
-              text="Construction"
-              to="/construction"
-              onClick={() => setMenuOpen(false)}
-            />
+                <MobileAnchor
+                  text="Construction"
+                  href="/construction"
+                  onClick={() => setMenuOpen(false)}
+                />
 
                 {/* Mobile Manufacturing Dropdown */}
 
@@ -303,7 +314,7 @@ function Header() {
 
                       <MobileRouterLink
                         text="Septictank Rings"
-                        to="/manufacturing-products/septictank-rings"
+                        to="/manufacturing-products/septictank-ring"
                         onClick={() => setMenuOpen(false)}
                       />
 
@@ -394,26 +405,32 @@ function Header() {
                       />
                       <MobileRouterLink
                         text="Jalli"
-                        to="building-materials/jalli"
+                        to="/building-materials/jalli"
                         onClick={() => setMenuOpen(false)}
                       />
                       <MobileRouterLink
                         text="Quarry Stone"
-                        to="building-materials/quarry-stone"
+                        to="/building-materials/quarry-stone"
                         onClick={() => setMenuOpen(false)}
                       />
                         <MobileRouterLink
                         text="Gravel"
-                        to="building-materials/gravel"
+                        to="/building-materials/gravel"
                         onClick={() => setMenuOpen(false)}
                       />
                     </motion.div>
                   )}
                 </AnimatePresence>
 
-                <MobileRouterLink
+                {/* <MobileRouterLink
                   text="Projects"
-                  to="/projects"
+                  to="/Projects"
+                  onClick={() => setMenuOpen(false)}
+                /> */}
+
+                <MobileAnchor
+                  text="Projects"
+                  href="/Projects"
                   onClick={() => setMenuOpen(false)}
                 />
 
@@ -509,6 +526,7 @@ function NavLink({ text, href }) {
   );
 }
 
+
 /* =========================================
    DESKTOP DROPDOWN
 ========================================= */
@@ -594,17 +612,23 @@ function DropdownItem({ text, to }) {
 
 function MobileAnchor({ text, href, onClick }) {
   return (
-    <a
-      href={href}
+    <HashLink
+      smooth
+      to={href}
       onClick={onClick}
       className="
+        rounded-lg
+        px-2 py-2
         font-medium text-gray-800
-        transition-colors
-        hover:text-cyan-500
+        transition-all duration-300
+        hover:bg-cyan-50
+        hover:text-cyan-600
+        active:scale-[0.98]
+        active:bg-cyan-100
       "
     >
       {text}
-    </a>
+    </HashLink>
   );
 }
 
@@ -614,12 +638,15 @@ function MobileRouterLink({ text, to, onClick }) {
       to={to}
       onClick={onClick}
       className="
+        block w-full
         rounded-lg
-        px-2 py-2
-        text-sm text-gray-600
-        transition-colors
+        px-3 py-3
+        text-sm text-gray-700
+        transition-all duration-200
         hover:bg-cyan-50
         hover:text-cyan-600
+        active:scale-[0.98]
+        active:bg-cyan-100
       "
     >
       {text}
@@ -698,33 +725,55 @@ function QuotePopup({ open, onClose }) {
     return validationErrors;
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+ const handleSubmit = async (event) => {
+  event.preventDefault();
 
-    const validationErrors = validateForm();
-    setErrors(validationErrors);
+  const validationErrors = validateForm();
+  setErrors(validationErrors);
 
-    if (Object.keys(validationErrors).length > 0) {
+  if (Object.keys(validationErrors).length > 0) {
+    return;
+  }
+
+  try {
+      const apiUrl =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+    const response = await fetch(`${apiUrl}/api/enquiry`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
+
+    const data = await response.json();
+
+    if (response.status === 422 && data.errors) {
+      setErrors(data.errors);
       return;
     }
 
-    /*
-      Backend setup செய்யும்போது இங்கே fetch API add செய்யலாம்.
-
-      Example:
-
-      await fetch("http://localhost:5000/api/enquiry", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-    */
+    if (!response.ok) {
+      throw new Error(
+        data.message || "Failed to send enquiry"
+      );
+    }
 
     setSubmitted(true);
     setForm(initialQuoteForm);
-  };
+    setErrors({});
+  } catch (error) {
+    console.error("Quote form error:", error);
+
+    alert(
+      error.message ||
+        "Something went wrong. Please try again."
+    );
+  }
+};
+    
+
 
   const closePopup = () => {
     setErrors({});
@@ -980,6 +1029,7 @@ function QuotePopup({ open, onClose }) {
                         icon={UserRound}
                         error={errors.name}
                         onChange={handleChange}
+                        maxLength={60}
                       />
 
                       <div className="grid gap-5 sm:grid-cols-2">
@@ -992,6 +1042,7 @@ function QuotePopup({ open, onClose }) {
                           icon={Phone}
                           error={errors.phone}
                           onChange={handleChange}
+                           maxLength={16}
                         />
 
                         <QuoteField
@@ -1003,6 +1054,7 @@ function QuotePopup({ open, onClose }) {
                           icon={Mail}
                           error={errors.email}
                           onChange={handleChange}
+                          maxLength={100}
                         />
                       </div>
 
@@ -1033,6 +1085,7 @@ function QuotePopup({ open, onClose }) {
                             rows="4"
                             value={form.message}
                             onChange={handleChange}
+                            maxLength={1000}
                             placeholder="Tell us about your construction requirement..."
                             className={`
                               min-h-32 w-full resize-none
@@ -1163,6 +1216,8 @@ function QuoteField({
   icon: Icon,
   error,
   onChange,
+  maxLength,
+
 }) {
   return (
     <div>
@@ -1194,6 +1249,7 @@ function QuoteField({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          maxLength={maxLength}
           className={`
             w-full
             rounded-xl border

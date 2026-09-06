@@ -231,7 +231,7 @@ function BuildingMaterials() {
               "
             />
 
-            <span
+            {/* <span
               className="
                 relative
                 rounded-[11px]
@@ -248,7 +248,7 @@ function BuildingMaterials() {
               "
             >
               View All Materials
-            </span>
+            </span> */}
           </Link>
         </motion.div>
       </div>
@@ -261,7 +261,7 @@ function MaterialCard({ item, index }) {
 
   return (
     <Link
-      to={`/#contact/${item.id}`}
+      to={`/building-materials/${item.id}`}
       className="group block h-full"
     >
       <motion.div

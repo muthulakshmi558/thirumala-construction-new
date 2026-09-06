@@ -1,6 +1,6 @@
 import React from "react";
 import "../index.css";
-
+import logo from "../assets/logo.jpg";
 const Footer = () => {
   return (
     <footer className="footer">
@@ -13,8 +13,11 @@ const Footer = () => {
         {/* Company */}
         <div className="footer-column footer-about">
           <div className="footer-logo">
-            <img src="./src/assets/logo.jpg" alt="Thirumala Construction" />
-          </div>
+                <img
+                  src={logo}
+                  alt="Thirumala Construction"
+                />         
+                </div>
 
           <h3>Thirumala Construction</h3>
 
@@ -68,8 +71,8 @@ const Footer = () => {
             <span className="contact-icon">⌖</span>
             <p>
               60-A,Chinnasamy Nagar,<br/>
-              Ganapthy,Coimbatore - 641 006.
-              ,<br />
+              Ganapathy,Coimbatore - 641 006
+              <br />
               Tamil Nadu, India
             </p>
           </div>
