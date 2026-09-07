@@ -1,4 +1,4 @@
-import brickMain from "../assets/brick_main.png";
+import brickMain from "../assets/fly_ash_bricks.png";
 
 const BricksSecondFold = () => {
   return (

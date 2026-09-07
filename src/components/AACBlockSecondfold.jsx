@@ -1,4 +1,4 @@
-import brickMain from "../assets/brick_main.png";
+import brickMain from "../assets/aac_block.png";
 
 const AACBlockSecondfold = () => {
   return (
