@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Existing files/folders direct-ah load aaganum
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# React Router routes ellam index.html-ku poganum
+RewriteRule ^ index.html [L]
