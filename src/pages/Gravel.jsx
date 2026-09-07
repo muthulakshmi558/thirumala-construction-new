@@ -1,8 +1,8 @@
 import React from "react";
 import TopBar from "../components/TopBar";
 import Header from "../components/Header";
-import MSandHero from "../components/MSandHero";
-import MSandSecondfold from "../components/MSandSecondfold";
+import GravelHero from "../components/GravelHero";
+import GravelSecondfold from "../components/GravelSecondfold"
 import CallNowBox from "../components/CallNowBox";
 import Footer from "../components/Footer";
 
@@ -11,8 +11,8 @@ function GravelPage() {
     <>
       <TopBar />
       <Header />
-      <MSandHero/>
-      <MSandSecondfold />
+      <GravelHero/>
+      <GravelSecondfold />
       <CallNowBox />
       <Footer />
     </>
